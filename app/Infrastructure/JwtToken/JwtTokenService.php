@@ -33,7 +33,7 @@ class JwtTokenService implements JwtTokenServiceInterface
             'iss' => $this->domain,
             'aud' => $this->domain,
             'iat' => $iat->getTimestamp(),
-            'nbf' => $nbf->getTimestamp(),
+            'exp' => $nbf->getTimestamp(),
             'id'  => $data->getId(),
         ];
 
@@ -47,6 +47,6 @@ class JwtTokenService implements JwtTokenServiceInterface
     {
         $decoded = JWT::decode($token, new Key($this->secret, 'HS256'));
 
-        return $decoded['id'];
+        return $decoded->id;
     }
 }
