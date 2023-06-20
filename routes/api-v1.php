@@ -21,4 +21,5 @@ Route::group(['prefix' => 'users'], function () {
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', [\App\Http\Controllers\API\v1\Auth\Login\Controller::class, 'run']);
+    Route::get('me', [\App\Http\Controllers\API\v1\Auth\Me\Controller::class, 'run']);
 });

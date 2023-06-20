@@ -2,10 +2,10 @@
 
 namespace App\Jam\Auth\Action;
 
-use App\Infrastructure\JwtToken\JwtTokenService;
 use App\Jam\Auth\Contract\LoginDataInterface;
 use App\Jam\Auth\Contract\TokenDataInterface;
 use App\Jam\Auth\Dto\LoginPayloadData;
+use App\Jam\Auth\Service\JwtTokenServiceInterface;
 use App\Jam\Exception\ApplicationException;
 use App\Jam\User\Repository\UserRepositoryInterface;
 use Illuminate\Support\Facades\Hash;
@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Hash;
 class LoginAction
 {
     public function __construct(
-        private readonly UserRepositoryInterface $userRepository,
-        private readonly JwtTokenService         $jwtTokenService
+        private readonly UserRepositoryInterface  $userRepository,
+        private readonly JwtTokenServiceInterface $jwtTokenService
     )
     {}
 

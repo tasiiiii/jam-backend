@@ -5,12 +5,13 @@ namespace App\Infrastructure\JwtToken;
 use App\Infrastructure\JwtToken\ValueObject\TokenData;
 use App\Jam\Auth\Contract\LoginPayloadDataInterface;
 use App\Jam\Auth\Contract\TokenDataInterface;
+use App\Jam\Auth\Service\JwtTokenServiceInterface;
 use DateTime;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Illuminate\Support\Facades\Config;
 
-class JwtTokenService
+class JwtTokenService implements JwtTokenServiceInterface
 {
     private string $domain;
     private string $secret;
@@ -35,8 +36,6 @@ class JwtTokenService
             'nbf' => $nbf->getTimestamp(),
             'id'  => $data->getId(),
         ];
-
-        $token = JWT::encode($payload, $this->secret, 'HS256');
 
         return new TokenData(
             JWT::encode($payload, $this->secret, 'HS256'),
