@@ -6,6 +6,7 @@ use DateTime;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
+ * @property int           $id
  * @property string        $first_name
  * @property string|null   $middle_name
  * @property string        $last_name
