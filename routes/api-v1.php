@@ -14,3 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('ping', [\App\Http\Controllers\API\v1\Ping\Controller::class, 'run']);
+
+Route::group(['prefix' => 'users'], function () {
+    Route::post('', [\App\Http\Controllers\API\v1\User\Create\Controller::class, 'run']);
+});

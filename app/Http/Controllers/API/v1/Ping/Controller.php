@@ -20,10 +20,13 @@ class Controller extends BaseController
 
     public function run(): JsonResponse
     {
-        return $this->jsonResponseFactory->success([
-            'name'        => 'Jam',
-            'description' => 'Jam - game project management system for both indie developers and studios',
-            'version'     => $this->appVersion,
-        ]);
+        return $this->jsonResponseFactory->success(
+            'Hello, World!',
+            [
+                'name'        => 'Jam',
+                'description' => 'Jam - game project management system for both indie developers and studios',
+                'version'     => $this->appVersion,
+            ]
+        );
     }
 }

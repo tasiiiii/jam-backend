@@ -7,13 +7,19 @@ use Symfony\Component\HttpFoundation\Response;
 
 class JsonResponseFactory
 {
-    public function success(array $data = []): JsonResponse
+    public function success(string $message = '', array $data = []): JsonResponse
     {
-        return new JsonResponse($data);
+        return new JsonResponse([
+            'message' => $message,
+            'data'    => $data
+        ]);
     }
 
-    public function error(array $data = [], int $status = Response::HTTP_FORBIDDEN): JsonResponse
+    public function error(string $message = '', array $data = [], int $status = Response::HTTP_FORBIDDEN): JsonResponse
     {
-        return new JsonResponse($data, $status);
+        return new JsonResponse([
+            'message' => $message,
+            'data'    => $data
+        ], $status);
     }
 }
