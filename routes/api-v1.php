@@ -13,3 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('ping', [\App\Http\Controllers\API\v1\Ping\Controller::class, 'run']);
