@@ -7,6 +7,16 @@ use App\UI\Response\JsonResponseFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Config;
 
+/**
+ * @OA\Get(
+ *     path="/api/v1/ping",
+ *     summary="Test system",
+ *     @OA\Response(
+ *         response=200,
+ *         description="Success"
+ *     )
+ * )
+ */
 class Controller extends BaseController
 {
     private string $appVersion;
