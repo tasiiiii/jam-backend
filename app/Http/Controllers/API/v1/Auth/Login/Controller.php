@@ -9,6 +9,59 @@ use App\Jam\Exception\ApplicationException;
 use App\UI\Response\JsonResponseFactory;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * @OA\Post(
+ *     path="/api/v1/auth/login",
+ *     summary="Login user",
+ *     @OA\RequestBody(
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 @OA\Property(
+ *                     property="email",
+ *                     type="string"
+ *                 ),
+ *                 @OA\Property(
+ *                     property="password",
+ *                     type="string"
+ *                 ),
+ *                 example={"email": "test@jam.local", "password": "12345678"}
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Success",
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 @OA\Property(
+ *                      property="message",
+ *                      type="string"
+ *                 ),
+ *                 @OA\Property(
+ *                      property="data",
+ *                      type="array",
+ *                      @OA\Items(@OA\Property(property="token", type="string"), @OA\Property(property="expired_at", type="int"))
+ *                 )
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=403,
+ *         description="Error",
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 @OA\Property(
+ *                      property="message",
+ *                      type="string"
+ *                 )
+ *             )
+ *         )
+ *     )
+ * )
+ */
 class Controller extends BaseController
 {
     public function __construct(

@@ -64,7 +64,7 @@ use Illuminate\Http\JsonResponse;
  *             mediaType="application/json",
  *             @OA\Schema(
  *                 @OA\Property(
- *                      property="error",
+ *                      property="message",
  *                      type="string"
  *                 )
  *             )
