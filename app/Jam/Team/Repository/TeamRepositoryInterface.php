@@ -13,5 +13,10 @@ interface TeamRepositoryInterface
      */
     public function getById(int $id): ?object;
 
+    /**
+     * @return Team|null
+     */
+    public function getByIdAndUser(int $id, User $user): ?object;
+
     public function getByUser(User $user): Collection;
 }

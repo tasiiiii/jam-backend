@@ -15,11 +15,11 @@ class JsonResponseFactory
         ]);
     }
 
-    public function error(string $message = '', array $data = [], int $status = Response::HTTP_FORBIDDEN): JsonResponse
+    public function error(string $message = '', array $data = [], int $code = Response::HTTP_FORBIDDEN): JsonResponse
     {
         return new JsonResponse([
             'message' => $message,
             'data'    => $data
-        ], $status);
+        ], $code);
     }
 }

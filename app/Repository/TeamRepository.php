@@ -17,6 +17,19 @@ class TeamRepository implements TeamRepositoryInterface
         return Team::query()->find($id);
     }
 
+    /**
+     * @return Team|null
+     */
+    public function getByIdAndUser(int $id, User $user): ?object
+    {
+        return Team::query()
+            ->select('teams.*')
+            ->join('team_users', 'teams.id', '=', 'team_users.team_id')
+            ->where('teams.id', '=', $id)
+            ->where('team_users.user_id', '=', $user->id)
+            ->first();
+    }
+
     public function getByUser(User $user): Collection
     {
         return Team::query()
