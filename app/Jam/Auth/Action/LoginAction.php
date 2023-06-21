@@ -7,6 +7,7 @@ use App\Jam\Auth\Contract\TokenDataInterface;
 use App\Jam\Auth\Dto\LoginPayloadData;
 use App\Jam\Auth\Service\JwtTokenServiceInterface;
 use App\Jam\Exception\ApplicationException;
+use App\Jam\User\Enum\StatusEnum;
 use App\Jam\User\Repository\UserRepositoryInterface;
 use Illuminate\Support\Facades\Hash;
 
@@ -30,6 +31,10 @@ class LoginAction
 
         if (!Hash::check($data->getPassword(), $user->password)) {
             throw new ApplicationException('Wrong login or password');
+        }
+
+        if ($user->status === StatusEnum::Banned->value) {
+            throw new ApplicationException('User banned');
         }
 
         return $this->jwtTokenService->encode(
