@@ -26,4 +26,6 @@ Route::group(['prefix' => 'users'], function () {
 
 Route::group(['prefix' => 'teams'], function () {
     Route::post('', [\App\Http\Controllers\API\v1\Team\Create\Controller::class, 'run']);
+    Route::put('{id}', [\App\Http\Controllers\API\v1\Team\Update\Controller::class, 'run'])
+        ->where('id', '[0-9]+');
 });
