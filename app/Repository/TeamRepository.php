@@ -20,6 +20,7 @@ class TeamRepository implements TeamRepositoryInterface
     public function getByUser(User $user): Collection
     {
         return Team::query()
+            ->select('teams.*')
             ->join('team_users', 'teams.id', '=', 'team_users.team_id')
             ->where('team_users.user_id', '=', $user->id)
             ->get();
