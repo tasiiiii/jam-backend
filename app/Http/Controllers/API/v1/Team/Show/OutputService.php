@@ -16,7 +16,7 @@ class OutputService
 
     public function build(Team $team): array
     {
-        $user = $this->userRepository->getById($team->id);
+        $user = $this->userRepository->getById($team->creator_id);
 
         return [
             'id'      => $team->id,
