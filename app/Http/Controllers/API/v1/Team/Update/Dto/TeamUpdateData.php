@@ -9,7 +9,7 @@ class TeamUpdateData implements TeamUpdateDataInterface
     private int    $id;
     private string $name;
 
-    public function getId(): int
+    public function getTeamId(): int
     {
         return $this->id;
     }

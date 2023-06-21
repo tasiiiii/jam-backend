@@ -23,7 +23,7 @@ class TeamUpdateAction
      */
     public function run(TeamUpdateDataInterface $data): Team
     {
-        $team = $this->teamRepository->getById($data->getId());
+        $team = $this->teamRepository->getById($data->getTeamId());
         if (is_null($team)) {
             throw new ApplicationException('Team not found');
         }

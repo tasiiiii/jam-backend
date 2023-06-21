@@ -4,5 +4,5 @@ namespace App\Jam\Team\Contract;
 
 interface TeamIdentificationDataInterface
 {
-    public function getId(): int;
+    public function getTeamId(): int;
 }

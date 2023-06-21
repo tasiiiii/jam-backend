@@ -16,7 +16,5 @@ class TeamCreateGate
         if ($user->status !== StatusEnum::Active->value) {
             throw new ApplicationException('Current user can not create a team - user is not active');
         }
-
-
     }
 }

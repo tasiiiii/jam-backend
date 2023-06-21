@@ -18,10 +18,10 @@ class Controller
 
     public function run(int $id, Request $request): JsonResponse
     {
-        try {
-            $data = $request->getData();
-            $data->setId($id);
+        $data = $request->getData();
+        $data->setId($id);
 
+        try {
             $team = $this->teamUpdateAction->run($data);
         } catch (ApplicationException $e) {
             return $this->jsonResponseFactory->error($e->getMessage());
