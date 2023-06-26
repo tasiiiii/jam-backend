@@ -35,3 +35,7 @@ Route::group(['prefix' => 'teams'], function () {
         ->where('teamId', '[0-9]+')
         ->where('userId', '[0-9]+');
 });
+
+Route::group(['prefix' => 'projects'], function () {
+    Route::post('', [\App\Http\Controllers\API\v1\Project\Create\Controller::class, 'run']);
+});
