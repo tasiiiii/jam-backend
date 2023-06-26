@@ -8,6 +8,7 @@ use App\Jam\Project\Contract\ProjectCreateDataInterface;
 use App\Jam\Project\Gate\ProjectCreateGate;
 use App\Jam\Project\Enum\StatusEnum;
 use App\Jam\Team\Repository\TeamRepositoryInterface;
+use App\Jam\User\Service\UserStatusChecker;
 use App\Models\Project;
 
 class CreateProjectAction
@@ -15,6 +16,7 @@ class CreateProjectAction
     public function __construct(
         private readonly TeamRepositoryInterface $teamRepository,
         private readonly ProjectCreateGate       $projectCreateGate,
+        private readonly UserStatusChecker       $userStatusChecker,
         private readonly UserProviderInterface   $userProvider
     )
     {}
@@ -24,15 +26,16 @@ class CreateProjectAction
      */
     public function run(ProjectCreateDataInterface $data): void
     {
+        $currentUser = $this->userProvider->getCurrentUser();
+
+        $this->userStatusChecker->check($currentUser);
+
         $team = $this->teamRepository->getById($data->getTeamId());
         if (is_null($team)) {
             throw new ApplicationException('Team not found');
         }
 
-        $this->projectCreateGate->can(
-            $this->userProvider->getCurrentUser(),
-            $team
-        );
+        $this->projectCreateGate->can($currentUser, $team);
 
         $project              = new Project();
         $project->title       = $data->getTitle();

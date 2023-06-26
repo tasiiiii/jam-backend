@@ -8,6 +8,7 @@ use App\Jam\Permission\Enum\PermissionEnum;
 use App\Jam\Team\Contract\TeamCreateDataInterface;
 use App\Jam\Team\Enum\StatusEnum;
 use App\Jam\Team\Gate\TeamCreateGate;
+use App\Jam\User\Service\UserStatusChecker;
 use App\Models\Team;
 use App\Models\TeamUser;
 use App\Models\TeamUserRole;
@@ -15,6 +16,7 @@ use App\Models\TeamUserRole;
 class TeamCreateAction
 {
     public function __construct(
+        private readonly UserStatusChecker     $userStatusChecker,
         private readonly UserProviderInterface $userProvider,
         private readonly TeamCreateGate        $teamCreateGate
     )
@@ -26,6 +28,8 @@ class TeamCreateAction
     public function run(TeamCreateDataInterface $data): Team
     {
         $currentUser = $this->userProvider->getCurrentUser();
+
+        $this->userStatusChecker->check($currentUser);
         $this->teamCreateGate->can($currentUser);
 
         $team             = new Team();

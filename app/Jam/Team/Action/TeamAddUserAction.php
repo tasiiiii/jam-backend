@@ -9,6 +9,7 @@ use App\Jam\Team\Gate\TeamAddUserGate;
 use App\Jam\Team\Repository\TeamRepositoryInterface;
 use App\Jam\Team\Repository\TeamUserRoleRepositoryInterface;
 use App\Jam\User\Repository\UserRepositoryInterface;
+use App\Jam\User\Service\UserStatusChecker;
 use App\Models\TeamUser;
 use App\Repository\TeamUserRepository;
 
@@ -20,6 +21,7 @@ class TeamAddUserAction
         private readonly UserRepositoryInterface         $userRepository,
         private readonly TeamUserRepository              $teamUserRepository,
         private readonly TeamUserRoleRepositoryInterface $teamUserRoleRepository,
+        private readonly UserStatusChecker               $userStatusChecker,
         private readonly UserProviderInterface           $userProvider
     )
     {}
@@ -29,6 +31,10 @@ class TeamAddUserAction
      */
     public function run(TeamAddUserDataInterface $data): void
     {
+        $currentUser = $this->userProvider->getCurrentUser();
+
+        $this->userStatusChecker->check($currentUser);
+
         $team = $this->teamRepository->getById($data->getTeamId());
         if (is_null($team)) {
             throw new ApplicationException('Team not found');
@@ -49,7 +55,6 @@ class TeamAddUserAction
             throw new ApplicationException('The user is already a member of the team');
         }
 
-        $currentUser = $this->userProvider->getCurrentUser();
         $this->teamAddUserGate->can($team, $currentUser);
 
         $teamUser                    = new TeamUser();
