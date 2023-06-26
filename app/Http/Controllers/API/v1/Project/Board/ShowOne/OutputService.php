@@ -13,6 +13,7 @@ class OutputService
             $columns[] = [
                 'title'              => $column->getTitle(),
                 'total_story_points' => $column->getTotalStoryPoints(),
+                'tasks'              => [],
             ];
         }
 
