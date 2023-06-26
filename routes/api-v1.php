@@ -41,6 +41,8 @@ Route::group(['prefix' => 'projects'], function () {
     Route::group(['prefix' => '{projectId}/boards'], function () {
         Route::post('', [\App\Http\Controllers\API\v1\Project\Board\Create\Controller::class, 'run']);
         Route::get('', [\App\Http\Controllers\API\v1\Project\Board\Show\Controller::class, 'run']);
+        Route::get('{boardId}', [\App\Http\Controllers\API\v1\Project\Board\ShowOne\Controller::class, 'run'])
+            ->where('boardId', '[0-9]+');
         Route::post('{boardId}/columns', [\App\Http\Controllers\API\v1\Project\Board\BoardColumn\Create\Controller::class, 'run'])
             ->where('boardId', '[0-9]+');
     });
