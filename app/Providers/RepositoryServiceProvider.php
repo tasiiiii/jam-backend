@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Jam\Board\Repository\BoardColumnRepositoryInterface;
 use App\Jam\Board\Repository\BoardRepositoryInterface;
 use App\Jam\Project\Repository\ProjectRepositoryInterface;
+use App\Jam\Task\Repository\TaskRepositoryInterface;
 use App\Jam\Team\Repository\TeamRepositoryInterface;
 use App\Jam\Team\Repository\TeamUserRepositoryInterface;
 use App\Jam\Team\Repository\TeamUserRoleRepositoryInterface;
@@ -12,6 +13,7 @@ use App\Jam\User\Repository\UserRepositoryInterface;
 use App\Repository\BoardColumnRepository;
 use App\Repository\BoardRepository;
 use App\Repository\ProjectRepository;
+use App\Repository\TaskRepository;
 use App\Repository\TeamRepository;
 use App\Repository\TeamUserRepository;
 use App\Repository\TeamUserRoleRepository;
@@ -29,6 +31,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ProjectRepositoryInterface::class, ProjectRepository::class);
         $this->app->bind(BoardRepositoryInterface::class, BoardRepository::class);
         $this->app->bind(BoardColumnRepositoryInterface::class, BoardColumnRepository::class);
+        $this->app->bind(TaskRepositoryInterface::class, TaskRepository::class);
     }
 
     public function boot(): void

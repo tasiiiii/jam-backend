@@ -10,10 +10,22 @@ class OutputService
     {
         $columns = [];
         foreach ($boardReport->getColumns() as $column) {
+            $tasks       = $column->getTasks();
+            $outputTasks = [];
+            foreach ($tasks as $task) {
+                $outputTasks[] = [
+                    'title'       => $task->getTitle(),
+                    'code'        => $task->getCode(),
+                    'story_point' => $task->getStoryPoint(),
+                    'creator'     => $task->getCreator(),
+                    'executor'    => $task->getExecutor(),
+                ];
+            }
+
             $columns[] = [
                 'title'              => $column->getTitle(),
                 'total_story_points' => $column->getTotalStoryPoints(),
-                'tasks'              => [],
+                'tasks'              => $outputTasks,
             ];
         }
 

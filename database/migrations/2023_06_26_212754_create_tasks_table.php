@@ -14,14 +14,17 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('description');
-            $table->float('story_point');
+            $table->string('code')->unique();
+            $table->text('description')->nullable();
+            $table->float('story_point')->nullable();
             $table->unsignedBigInteger('creator_id');
             $table->foreign('creator_id')->references('id')->on('users');
-            $table->unsignedBigInteger('executor_id');
+            $table->unsignedBigInteger('executor_id')->nullable();
             $table->foreign('executor_id')->references('id')->on('users');
-            $table->unsignedBigInteger('board_column_id');
+            $table->unsignedBigInteger('board_column_id')->nullable();
             $table->foreign('board_column_id')->references('id')->on('board_columns');
+            $table->unsignedBigInteger('board_id');
+            $table->foreign('board_id')->references('id')->on('boards');
             $table->timestamps();
         });
     }

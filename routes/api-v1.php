@@ -45,5 +45,7 @@ Route::group(['prefix' => 'projects'], function () {
             ->where('boardId', '[0-9]+');
         Route::post('{boardId}/columns', [\App\Http\Controllers\API\v1\Project\Board\BoardColumn\Create\Controller::class, 'run'])
             ->where('boardId', '[0-9]+');
+        Route::post('{boardId}/tasks', [\App\Http\Controllers\API\v1\Project\Board\Task\Create\Controller::class, 'run'])
+            ->where('boardId', '[0-9]+');
     });
 });
