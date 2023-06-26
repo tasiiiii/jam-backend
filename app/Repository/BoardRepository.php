@@ -9,6 +9,14 @@ use Illuminate\Database\Eloquent\Collection;
 
 class BoardRepository implements BoardRepositoryInterface
 {
+    /**
+     * @return Board|null
+     */
+    public function getById(int $id): ?object
+    {
+        return Board::query()->find($id);
+    }
+
     public function getByProject(Project $project): Collection
     {
         return Board::query()
