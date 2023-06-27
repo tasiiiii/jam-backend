@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API\v1\Project\Board\ShowOne;
 
-use App\Jam\Board\Dto\BoardReport\BoardReport;
+use App\UI\Board\Dto\BoardReport\BoardReport;
 
 class OutputService
 {

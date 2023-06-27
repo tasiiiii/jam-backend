@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API\v1\Project\Board\ShowOne;
 
 use App\Http\Controllers\BaseController;
 use App\Jam\Board\Repository\BoardRepositoryInterface;
-use App\Jam\Board\Service\BoardReportBuilder;
+use App\UI\Board\Service\BoardReportBuilder;
 use App\UI\Response\JsonResponseFactory;
 use Illuminate\Http\JsonResponse;
 

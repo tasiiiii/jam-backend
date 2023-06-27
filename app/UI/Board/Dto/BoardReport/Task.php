@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jam\Board\Dto\BoardReport;
+namespace App\UI\Board\Dto\BoardReport;
 
 class Task
 {
