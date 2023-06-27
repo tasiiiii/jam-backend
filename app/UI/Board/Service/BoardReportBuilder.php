@@ -10,7 +10,7 @@ use App\Models\BoardColumn;
 use App\Models\Task;
 use App\UI\Board\Dto\BoardReport\BoardReport;
 use App\UI\Board\Dto\BoardReport\Column;
-use App\UI\Board\Dto\BoardReport\Task as AppTask;
+use App\UI\Board\Dto\BoardReport\Task as TaskData;
 use App\UI\User\UserService;
 
 class BoardReportBuilder
@@ -44,7 +44,7 @@ class BoardReportBuilder
                     $executor = $this->userRepository->getById($task->executor_id);
                 }
 
-                $reportTasks[] = (new AppTask())
+                $reportTasks[] = (new TaskData())
                     ->setTitle($task->title)
                     ->setCode($task->code)
                     ->setStoryPoint($task->story_point)
