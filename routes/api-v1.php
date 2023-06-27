@@ -43,6 +43,8 @@ Route::group(['prefix' => 'projects'], function () {
         Route::get('', [\App\Http\Controllers\API\v1\Project\Board\Show\Controller::class, 'run']);
         Route::get('{boardId}', [\App\Http\Controllers\API\v1\Project\Board\ShowOne\Controller::class, 'run'])
             ->where('boardId', '[0-9]+');
+        Route::get('{boardId}/backlogs', [\App\Http\Controllers\API\v1\Project\Board\Task\Backlog\Controller::class, 'run'])
+            ->where('boardId', '[0-9]+');
         Route::post('{boardId}/columns', [\App\Http\Controllers\API\v1\Project\Board\BoardColumn\Create\Controller::class, 'run'])
             ->where('boardId', '[0-9]+');
         Route::post('{boardId}/tasks', [\App\Http\Controllers\API\v1\Project\Board\Task\Create\Controller::class, 'run'])

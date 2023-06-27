@@ -15,4 +15,5 @@ interface TaskRepositoryInterface
     public function getById(int $id): ?object;
     public function getByBoardColumn(BoardColumn $boardColumn): Collection;
     public function countTasksInBoard(Board $board): int;
+    public function getTasksWithoutBoardColumnInBoard(Board $board): Collection;
 }

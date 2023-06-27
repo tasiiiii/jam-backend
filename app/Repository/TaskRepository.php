@@ -31,4 +31,12 @@ class TaskRepository implements TaskRepositoryInterface
             ->where('board_id', '=', $board->id)
             ->count();
     }
+
+    public function getTasksWithoutBoardColumnInBoard(Board $board): Collection
+    {
+        return Task::query()
+            ->whereNull('board_column_id')
+            ->where('board_id', '=', $board->id)
+            ->get();
+    }
 }
