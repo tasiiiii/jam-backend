@@ -10,6 +10,14 @@ use Illuminate\Database\Eloquent\Collection;
 
 class TaskRepository implements TaskRepositoryInterface
 {
+    /**
+     * @return Task|null
+     */
+    public function getById(int $id): ?object
+    {
+        return Task::query()->find($id);
+    }
+
     public function getByBoardColumn(BoardColumn $boardColumn): Collection
     {
         return Task::query()

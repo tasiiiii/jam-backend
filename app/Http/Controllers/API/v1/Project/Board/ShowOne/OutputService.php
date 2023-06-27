@@ -14,6 +14,7 @@ class OutputService
             $outputTasks = [];
             foreach ($tasks as $task) {
                 $outputTasks[] = [
+                    'id'          => $task->getId(),
                     'title'       => $task->getTitle(),
                     'code'        => $task->getCode(),
                     'story_point' => $task->getStoryPoint(),
@@ -23,6 +24,7 @@ class OutputService
             }
 
             $columns[] = [
+                'id'                 => $column->getId(),
                 'title'              => $column->getTitle(),
                 'total_story_points' => $column->getTotalStoryPoints(),
                 'tasks'              => $outputTasks,

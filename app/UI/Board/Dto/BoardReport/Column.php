@@ -4,12 +4,25 @@ namespace App\UI\Board\Dto\BoardReport;
 
 class Column
 {
+    private int    $id;
     private string $title;
     private float  $totalStoryPoints;
     /**
      * @var Task[]
      */
     private array  $tasks;
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     public function getTitle(): string
     {

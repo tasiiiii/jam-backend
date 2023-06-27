@@ -45,6 +45,7 @@ class BoardReportBuilder
                 }
 
                 $reportTasks[] = (new TaskData())
+                    ->setId($task->id)
                     ->setTitle($task->title)
                     ->setCode($task->code)
                     ->setStoryPoint($task->story_point)
@@ -55,6 +56,7 @@ class BoardReportBuilder
             }
 
             $columns[] = (new Column())
+                ->setId($boardColumn->id)
                 ->setTitle($boardColumn->title)
                 ->setTotalStoryPoints($totalStoryPoints)
                 ->setTasks($reportTasks);

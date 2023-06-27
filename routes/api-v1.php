@@ -47,5 +47,8 @@ Route::group(['prefix' => 'projects'], function () {
             ->where('boardId', '[0-9]+');
         Route::post('{boardId}/tasks', [\App\Http\Controllers\API\v1\Project\Board\Task\Create\Controller::class, 'run'])
             ->where('boardId', '[0-9]+');
+        Route::put('{boardId}/tasks/{taskId}/move', [\App\Http\Controllers\API\v1\Project\Board\Task\Move\Controller::class, 'run'])
+            ->where('boardId', '[0-9]+')
+            ->where('taskId', '[0-9]+');
     });
 });

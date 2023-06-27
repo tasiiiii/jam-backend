@@ -4,11 +4,24 @@ namespace App\UI\Board\Dto\BoardReport;
 
 class Task
 {
+    private int     $id;
     private string  $title;
     private string  $code;
     private ?float  $storyPoint = null;
     private string  $creator;
     private ?string $executor = null;
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     public function getTitle(): string
     {
