@@ -41,7 +41,7 @@ class TaskMoveAction
 
         $this->taskMoveGate->can($currentUser, $targetBoardColumn);
 
-        $task->board_id = $targetBoardColumn->id;
+        $task->board_column_id = $targetBoardColumn->id;
         $task->save();
     }
 }
