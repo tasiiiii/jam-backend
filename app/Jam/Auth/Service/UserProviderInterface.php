@@ -7,4 +7,5 @@ use App\Models\User;
 interface UserProviderInterface
 {
     public function getCurrentUser(): User;
+    public function isGuest(): bool;
 }

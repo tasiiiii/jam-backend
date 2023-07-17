@@ -17,14 +17,14 @@ Route::get('ping', [\App\Http\Controllers\API\v1\Ping\Controller::class, 'run'])
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', [\App\Http\Controllers\API\v1\Auth\Login\Controller::class, 'run']);
-    Route::get('me', [\App\Http\Controllers\API\v1\Auth\Me\Controller::class, 'run']);
+    Route::get('me', [\App\Http\Controllers\API\v1\Auth\Me\Controller::class, 'run'])->middleware('auth.jwt');
 });
 
 Route::group(['prefix' => 'users'], function () {
     Route::post('', [\App\Http\Controllers\API\v1\User\Create\Controller::class, 'run']);
 });
 
-Route::group(['prefix' => 'teams'], function () {
+Route::group(['prefix' => 'teams', 'middleware' => 'auth.jwt'], function () {
     Route::post('', [\App\Http\Controllers\API\v1\Team\Create\Controller::class, 'run']);
     Route::get('', [\App\Http\Controllers\API\v1\Team\Show\Controller::class, 'run']);
     Route::get('{id}', [\App\Http\Controllers\API\v1\Team\ShowOne\Controller::class, 'run'])
@@ -36,7 +36,7 @@ Route::group(['prefix' => 'teams'], function () {
         ->where('userId', '[0-9]+');
 });
 
-Route::group(['prefix' => 'projects'], function () {
+Route::group(['prefix' => 'projects', 'middleware' => 'auth.jwt'], function () {
     Route::post('', [\App\Http\Controllers\API\v1\Project\Create\Controller::class, 'run']);
     Route::group(['prefix' => '{projectId}/boards'], function () {
         Route::post('', [\App\Http\Controllers\API\v1\Project\Board\Create\Controller::class, 'run']);

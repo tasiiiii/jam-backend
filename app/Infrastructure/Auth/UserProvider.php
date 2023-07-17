@@ -22,4 +22,16 @@ class UserProvider implements UserProviderInterface
 
         return $this->userRepository->getById($id);
     }
+
+    public function isGuest(): bool
+    {
+        $token = request()->header('Authorization');
+        if (is_null($token)) {
+            return true;
+        }
+
+        $id = $this->jwtTokenService->decode($token);
+
+        return $this->userRepository->getById($id) === null;
+    }
 }

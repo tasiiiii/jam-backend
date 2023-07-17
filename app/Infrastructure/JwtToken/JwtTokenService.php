@@ -2,11 +2,13 @@
 
 namespace App\Infrastructure\JwtToken;
 
+use App\Infrastructure\Exception\InfrastructureException;
 use App\Infrastructure\JwtToken\ValueObject\TokenData;
 use App\Jam\Auth\Contract\LoginPayloadDataInterface;
 use App\Jam\Auth\Contract\TokenDataInterface;
 use App\Jam\Auth\Service\JwtTokenServiceInterface;
 use DateTime;
+use Firebase\JWT\ExpiredException;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Illuminate\Support\Facades\Config;
@@ -43,9 +45,16 @@ class JwtTokenService implements JwtTokenServiceInterface
         );
     }
 
+    /**
+     * @throws InfrastructureException
+     */
     public function decode(string $token): int
     {
-        $decoded = JWT::decode($token, new Key($this->secret, 'HS256'));
+        try {
+            $decoded = JWT::decode($token, new Key($this->secret, 'HS256'));
+        } catch (ExpiredException $e) {
+            throw new InfrastructureException($e->getMessage());
+        }
 
         return $decoded->id;
     }
